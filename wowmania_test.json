@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "b3e5a5c7-1234-5678-9abc-def012345678",
+		"name": "WoWMania Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Register Seller",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"BoostGod\",\n    \"role\": \"SELLER\"\n}",
+					"options": { "raw": { "language": "json" } }
+				},
+				"url": { "raw": "http://localhost:8081/users/register", "protocol": "http", "host": ["localhost"], "port": "8081", "path": ["users", "register"] }
+			}
+		},
+		{
+			"name": "2. Register Buyer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"NoobPlayer\",\n    \"role\": \"BUYER\"\n}",
+					"options": { "raw": { "language": "json" } }
+				},
+				"url": { "raw": "http://localhost:8081/users/register", "protocol": "http", "host": ["localhost"], "port": "8081", "path": ["users", "register"] }
+			}
+		},
+		{
+			"name": "3. Create Listing",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Mythic+ Carry\",\n    \"price\": 500.0,\n    \"sellerId\": \"REPLACE_WITH_SELLER_ID_FROM_STEP_1\",\n    \"description\": \"Fast run\"\n}",
+					"options": { "raw": { "language": "json" } }
+				},
+				"url": { "raw": "http://localhost:8082/listings", "protocol": "http", "host": ["localhost"], "port": "8082", "path": ["listings"] }
+			}
+		},
+		{
+			"name": "4. Place Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"listingId\": \"REPLACE_WITH_LISTING_ID_FROM_STEP_3\",\n    \"buyerId\": \"REPLACE_WITH_BUYER_ID_FROM_STEP_2\"\n}",
+					"options": { "raw": { "language": "json" } }
+				},
+				"url": { "raw": "http://localhost:8083/orders", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["orders"] }
+			}
+		},
+		{
+			"name": "5. Update Status",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"COMPLETED\"\n}",
+					"options": { "raw": { "language": "json" } }
+				},
+				"url": { "raw": "http://localhost:8083/orders/REPLACE_WITH_ORDER_ID/status", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["orders", "REPLACE_WITH_ORDER_ID", "status"] }
+			}
+		}
+	]
+}
