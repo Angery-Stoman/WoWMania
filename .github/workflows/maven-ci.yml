@@ -2,9 +2,9 @@ name: WoWMania CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main", "master", "Milestone-5" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main", "master", "Milestone-5" ]
 
 jobs:
   build-and-test:
