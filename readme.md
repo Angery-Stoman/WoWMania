@@ -45,3 +45,25 @@ We chose four key design patterns to make our system clean, extensible and relia
 -Problem Addressed: Our main goals are scalability and data access speed. If our business logic contains databases queries directly, it makes it impossible to switch databases later or add chaching without rewriting service code.
 
 -Justification and Advantages: The Repository pattern creates a clean data layer. Our services only talk to an interface with handles all the messy database communication behind scenes. This enforces Separation of Concerns, making our core business logic unaware of database types. This is essential for testability and achieving high scalability by letting us swap out persistence technologies easily.  
+
+
+Milestone 5.
+1. Message Queue Integration (RabbitMQ)
+We transitioned from purely synchronous communication to asynchronous messaging to improve decoupling and fault tolerance.
+
+* Implementation: We integrated RabbitMQ.
+* Flow: 1.  `OrderService` (Producer) publishes an event to the `order-notifications` queue whenever an order is created or updated.
+        2.  `UserService` (Consumer) listens to this queue and processes the notification (simulating a user email alert).
+* Benefits:
+    * Decoupling: The Order Service does not need to know if the User Service is online. It fires the event and forgets it.
+    * Fault Tolerance: If `UserService` crashes, messages pile up in RabbitMQ. When `UserService` restarts, it processes all missed messages.
+  
+2. CI/CD Pipeline
+We implemented a Continuous Integration/Deployment pipeline using GitHub Actions.
+
+* Configuration: Located in `.github/workflows/maven-ci.yml`.
+* Triggers: Automatically runs on every `push` to the main branch.
+* Steps:
+    1.  Sets up a Java 21 environment.
+    2.  Compiles code and runs Maven tests.
+    3.  Builds the Docker containers to verify deployment readiness.
