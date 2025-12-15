@@ -1,13 +1,19 @@
 package com.wowmania.marketplace;
 
 import java.util.UUID;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "listings")
 public class Listing {
+    @Id
     private String id;
-    private String title;
-    private double price;
     private String sellerId;
+    private String title;
     private String description;
+    private double price;
     private String category;
 
     private Listing(ListingBuilder builder) {
@@ -18,6 +24,8 @@ public class Listing {
         this.description = builder.description;
         this.category = builder.category;
     }
+
+    public Listing() { }
 
     public String getId() { return id; }
     public String getTitle() { return title; }

@@ -27,8 +27,8 @@ public class MarketplaceController {
     }
 
     @GetMapping("/{id}")
-    public Listing getListing(@PathVariable String id) {
-        return repository.findById(id);
+    public Listing getListing(String id) {
+        return repository.findById(id).orElse(null);
     }
 
     @GetMapping

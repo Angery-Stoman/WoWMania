@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable String id) {
-        return repository.findById(id);
+    public User getUser(String id) {
+        return repository.findById(id).orElse(null);
     }
 }

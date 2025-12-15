@@ -37,11 +37,12 @@ public class OrderService {
     }
 
     public Order updateStatus(String id, String status) {
-        Order order = repository.findById(id);
+        Order order = repository.findById(id).orElse(null);
+
         if (order != null) {
             order.setStatus(status);
             repository.save(order);
-            
+
             rabbitTemplate.convertAndSend("order-notifications", order);
             System.out.println(">> [OrderService] Published update event to Queue for Order: " + order.getId());
         }
